@@ -13,12 +13,13 @@ namespace Pirates_of_lake_margaret
         enum Screen
         {
             Intro,
-            MainAnimation
+            MainAnimation,
+            Outro
         }
         MouseState mouseState;
         Screen screen;
-        Rectangle Raihan, ship, lewis;
-        Texture2D intro, mainLake, pirateShip, lewisHappy, lewisSad, raihanOpen, raihanClosed;
+        Rectangle Raihan, ship, lewis, window;
+        Texture2D intro, mainLake, pirateShip, lewisHappy, lewisSad, raihanOpen, raihanClosed, introBg, mainBg, outroBg;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -29,13 +30,20 @@ namespace Pirates_of_lake_margaret
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            window = new Rectangle(0,0,800,600);
+            _graphics.PreferredBackBufferWidth = window.Width;
+            _graphics.PreferredBackBufferHeight = window.Height;
+            _graphics.ApplyChanges();
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            introBg = Content.Load<Texture2D>("Jungle");
+            mainLake = Content.Load<Texture2D>("Lake Margerat");
+            pirateShip = Content.Load<Texture2D>("pirateShipLewis");
+            lewisHappy = Content.Load<Texture2D>("Lake Margerat");
 
             // TODO: use this.Content to load your game content here
         }
