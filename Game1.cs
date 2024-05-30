@@ -33,6 +33,7 @@ namespace Pirates_of_lake_margaret
             window = new Rectangle(0,0,800,600);
             _graphics.PreferredBackBufferWidth = window.Width;
             _graphics.PreferredBackBufferHeight = window.Height;
+            screen = Screen.Intro;
             _graphics.ApplyChanges();
             base.Initialize();
         }
@@ -40,7 +41,7 @@ namespace Pirates_of_lake_margaret
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            introBg = Content.Load<Texture2D>("Jungle");
+            introBg = Content.Load<Texture2D>("Jungle lake margerat");
             mainLake = Content.Load<Texture2D>("Lake Margerat");
             pirateShip = Content.Load<Texture2D>("pirateShipLewis");
             lewisHappy = Content.Load<Texture2D>("Lake Margerat");
@@ -52,8 +53,17 @@ namespace Pirates_of_lake_margaret
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
-            // TODO: Add your update logic here
+            if (screen == Screen.Intro)
+            {
+                if (mouseState.LeftButton == ButtonState.Pressed)
+                    screen = Screen.MainAnimation;
+            }
+            if (screen == Screen.MainAnimation)
+            {
+                //if (mouseState.LeftButton == ButtonState.Pressed)
+                //    screen = Screen.MainAnimation
+            }
+            
 
             base.Update(gameTime);
         }
