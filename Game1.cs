@@ -19,7 +19,7 @@ namespace Pirates_of_lake_margaret
         MouseState mouseState;
         Screen screen;
         Rectangle Raihan, ship, lewis, window;
-        Texture2D intro, mainLake, pirateShip, lewisHappy, lewisSad, raihanOpen, raihanClosed, introBg, mainBg, outroBg;
+        Texture2D windowScreen, pirateShip, lewisHappy, lewisSad, raihanOpen, raihanClosed, introBg, mainBg, outroBg;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -42,7 +42,7 @@ namespace Pirates_of_lake_margaret
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             introBg = Content.Load<Texture2D>("Jungle lake margerat");
-            mainLake = Content.Load<Texture2D>("Lake Margerat");
+            mainBg = Content.Load<Texture2D>("Lake Margerat");
             pirateShip = Content.Load<Texture2D>("pirateShipLewis");
             lewisHappy = Content.Load<Texture2D>("Lake Margerat");
 
@@ -51,15 +51,18 @@ namespace Pirates_of_lake_margaret
 
         protected override void Update(GameTime gameTime)
         {
+            mouseState = Mouse.GetState();
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             if (screen == Screen.Intro)
             {
+                windowScreen = introBg;
                 if (mouseState.LeftButton == ButtonState.Pressed)
                     screen = Screen.MainAnimation;
             }
             if (screen == Screen.MainAnimation)
             {
+                windowScreen = mainBg;
                 //if (mouseState.LeftButton == ButtonState.Pressed)
                 //    screen = Screen.MainAnimation
             }
@@ -73,7 +76,9 @@ namespace Pirates_of_lake_margaret
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-
+            _spriteBatch.Begin();
+            _spriteBatch.Draw(windowScreen, window, Color.White);
+            _spriteBatch.End();
             base.Draw(gameTime);
         }
     }
